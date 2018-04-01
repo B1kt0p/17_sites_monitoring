@@ -29,8 +29,7 @@ def load_domain4check(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             return file.read().split('\n')
     except FileNotFoundError:
-        print('File not found!')
-        exit()
+        return None
 
 
 def is_server_respond_with_ok(domain):
@@ -74,6 +73,9 @@ if __name__ == '__main__':
     args = get_args()
     number_days = get_args().days
     domain_list = load_domain4check(args.file)
+    if domain_list is None:
+        print('File not found!')
+        exit()
     print('\nCheck the status of the site from {}'.format(args.file))
     for domain in domain_list:
         site_status = check_site_status(domain, number_days)
