@@ -71,11 +71,10 @@ def check_site_status(domain, number_days):
 
 if __name__ == '__main__':
     args = get_args()
-    number_days = get_args().days
+    number_days = args.days
     domain_list = load_domain4check(args.file)
     if domain_list is None:
-        print('File not found!')
-        exit()
+        exit('File not found!')
     print('\nCheck the status of the site from {}'.format(args.file))
     for domain in domain_list:
         site_status = check_site_status(domain, number_days)
